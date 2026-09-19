@@ -46,8 +46,8 @@
                     <tbody>
                         <?php
                         $i = 0;
-                        $all_students = getAllStudents();
-                        foreach ($all_students as $index => $student) {
+                        $all_enrolled_list = getAllStudents();
+                        foreach ($all_enrolled_list as $index => $student) {
                             $i++;
                         ?>
                             <tr>

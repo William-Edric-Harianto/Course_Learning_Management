@@ -42,7 +42,8 @@ function getAllStudents()
     return $_SESSION['student_list'];
 }
 
-function getStudentWithID($student_id){
+function getStudentWithID($student_id)
+{
     return $_SESSION['student_list'][$student_id];
 }
 
@@ -51,7 +52,8 @@ function getAllCourses()
     return $_SESSION['course_list'];
 }
 
-function getCourseWithID($course_id){
+function getCourseWithID($course_id)
+{
     return $_SESSION['course_list'][$course_id];
 }
 
@@ -74,6 +76,22 @@ function updateCourse($course_id)
     $course->description = $_POST['inputDescription'];
 }
 
+function updateCourseEnrollment()
+{
+    foreach (getAllCourses() as $course_index => $course) { //setiap course
+        $student_in_course = $course->enrolled_list; // simpen array student dalem course
+        foreach (getAllStudents() as $student_index => $student) { //setiap student
+            if (isset($_POST["course={$course_index},student={$student_index}"])) { //kalau dicentang masuk, (sesuai format inputName)
+                if (!in_array($student_in_course, $student)) array_push($student_in_course, $student); //sebelumnya gaada, dimasukin
+            } else { //kalau ga dicentang
+                if (in_array($student_in_course, $student)) unset($student_in_course[$student]); //sebelumnya ada,dibuang
+            }
+        }
+        $course->enrolled_list = $student_in_course; //save array ke objek course
+        $_SESSION['course_list']['course_index'] = $student; //save objek ke session
+    }
+}
+
 #endregion
 
 #region Delete
@@ -89,6 +107,7 @@ function deleteCourse($course_id)
 }
 
 #endregion
+
 
 #endregion
 
@@ -118,6 +137,11 @@ if (isset($_POST['button_update_student'])) {
 if (isset($_POST['button_update_course'])) {
     updateCourse($_POST['course_id']);
     header('Location:../view/view_course.php');
+}
+
+if (isset($_POST['button_update_enrollment'])) {
+    updateCourseEnrollment();
+    header('Location:../view/view_enrollment.php');
 }
 
 #endregion
