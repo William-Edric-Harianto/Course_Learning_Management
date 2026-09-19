@@ -1,6 +1,6 @@
 <?php
-require('model/model_course.php');
-require('model/model_student.php');
+require('../model/model_course.php');
+require('../model/model_student.php');
 session_start();
 
 //create session student_list and course_list if not exist
@@ -42,9 +42,17 @@ function getAllStudents()
     return $_SESSION['student_list'];
 }
 
+function getStudentWithID($student_id){
+    return $_SESSION['student_list'][$student_id];
+}
+
 function getAllCourses()
 {
     return $_SESSION['course_list'];
+}
+
+function getCourseWithID($course_id){
+    return $_SESSION['course_list'][$course_id];
 }
 
 #endregion
@@ -62,7 +70,7 @@ function updateStudent($student_id)
 function updateCourse($course_id)
 {
     $course = $_SESSION['course_list'][$course_id];
-    $course->name = $_POST['Name'];
+    $course->name = $_POST['inputName'];
     $course->description = $_POST['inputDescription'];
 }
 
@@ -90,26 +98,26 @@ function deleteCourse($course_id)
 
 if (isset($_POST['button_create_student'])) {
     createStudent();
-    header('Location:view_student.php');
+    header('Location:../view/view_student.php');
 }
 
 if (isset($_POST['button_create_course'])) {
     createCourse();
-    header('Location:view_course.php');
+    header('Location:../view/view_course.php');
 }
 
 #endregion
 
 #region Update
 
-if (isset($_POST['button_create_student'])) {
-    createStudent();
-    header('Location:view_student.php');
+if (isset($_POST['button_update_student'])) {
+    updateStudent($_POST['student_id']);
+    header('Location:../view/view_student.php');
 }
 
-if (isset($_POST['button_create_course'])) {
-    createCourse();
-    header('Location:view_course.php');
+if (isset($_POST['button_update_course'])) {
+    updateCourse($_POST['course_id']);
+    header('Location:../view/view_course.php');
 }
 
 #endregion
@@ -118,12 +126,12 @@ if (isset($_POST['button_create_course'])) {
 
 if (isset($_GET['delete_student_id'])) {
     deleteStudent($_GET['delete_student_id']);
-    header('Location:view_student.php');
+    header('Location:../view/view_student.php');
 }
 
 if (isset($_GET['delete_course_id'])) {
-    deleteCourse($_GET['delete_student_id']);
-    header('Location:view_course.php');
+    deleteCourse($_GET['delete_course_id']);
+    header('Location:../view/view_course.php');
 }
 
 #endregion
