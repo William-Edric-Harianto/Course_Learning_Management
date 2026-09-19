@@ -69,7 +69,7 @@
                                             <td class="py-[0.5rem]"><?= $student->phone ?></td>
                                             <td class="py-[0.5rem]"><?= $student->email ?></td>
                                             <td class="py-[0.5rem]">
-                                                <?php if (in_array($course->enrolled_list, $student)) //kalau student sudah ada
+                                                <?php if (in_array($student, $course->enrolled_list)) //kalau student sudah ada
                                                 {
                                                 ?><!--sudah dicentang-->
                                                     <input type="checkbox" name="course=<?= $course_index ?>,student=<?= $student_index ?>" checked>
@@ -93,8 +93,8 @@
                     }
                     ?>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 
 </body>

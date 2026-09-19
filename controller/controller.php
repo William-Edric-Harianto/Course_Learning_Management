@@ -76,19 +76,16 @@ function updateCourse($course_id)
     $course->description = $_POST['inputDescription'];
 }
 
-function updateCourseEnrollment()
+function updateCourseEnrollment()// ini penting lipp
 {
     foreach (getAllCourses() as $course_index => $course) { //setiap course
-        $student_in_course = $course->enrolled_list; // simpen array student dalem course
+        $student_in_course = array(); // sempty array
         foreach (getAllStudents() as $student_index => $student) { //setiap student
             if (isset($_POST["course={$course_index},student={$student_index}"])) { //kalau dicentang masuk, (sesuai format inputName)
-                if (!in_array($student_in_course, $student)) array_push($student_in_course, $student); //sebelumnya gaada, dimasukin
-            } else { //kalau ga dicentang
-                if (in_array($student_in_course, $student)) unset($student_in_course[$student]); //sebelumnya ada,dibuang
-            }
+                array_push($student_in_course,$student);
+            } 
         }
-        $course->enrolled_list = $student_in_course; //save array ke objek course
-        $_SESSION['course_list']['course_index'] = $student; //save objek ke session
+        $_SESSION['course_list'][$course_index]->enrolled_list = $student_in_course; //save array ke session
     }
 }
 
