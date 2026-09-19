@@ -1,13 +1,16 @@
 <?php
 
-class model_student{
-    private $name;
-    private $password;
+class model_student
+{
+    public $username;
+    public $phone;
+    public $email;
 
-    public function __construct(){
-        throw new \Exception('Not implemented');
+    public function __construct($username, $phone, $email)
+    {
+        $this->username = $username;
+        $this->phone = $phone;
+        $this->email = $email;
     }
 
 }
-
-?>
