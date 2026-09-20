@@ -53,7 +53,7 @@
                                         <th scope="col" class="py-[1rem] px-[8rem]">Username</th>
                                         <th scope="col" class="py-[1rem] px-[6rem]">Phone</th>
                                         <th scope="col" class="py-[1rem] px-[6rem]">Email</th>
-                                        <th scope="col" class="py-[1rem] px-[7rem]">Action</th>
+                                        <th scope="col" class="py-[1rem] px-[7rem]">Enrolled</th>
                                     </tr>
                                 </thead>
                                 <tbody>
