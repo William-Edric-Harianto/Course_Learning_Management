@@ -41,26 +41,22 @@ function createDummyData()
     $archery_course = new model_course('Advanced Archery', 'Special class by Olympic Champion');
     $crypto_course = new model_course('Intro to Crypto Market', 'Kepp Grinding');
     //enroll student
-    array_push(
-        $ai_course->enrolled_list,
+    array_push($ai_course->enrolled_list,
         $budi_student,
         $john_student,
         $gaben_student
     );
-    array_push(
-        $archery_course->enrolled_list,
+    array_push($archery_course->enrolled_list,
         $budi_student,
         $siska_student,
         $tono_student
     );
-    array_push(
-        $crypto_course->enrolled_list,
+    array_push($crypto_course->enrolled_list,
         $budi_student,
         $tono_student
     );
     //masukin student
-    array_push(
-        $_SESSION['student_list'],
+    array_push($_SESSION['student_list'],
         $budi_student,
         $john_student,
         $gaben_student,
@@ -68,8 +64,7 @@ function createDummyData()
         $tono_student
     );
     //masukin course
-    array_push(
-        $_SESSION['course_list'],
+    array_push($_SESSION['course_list'],
         $ai_course,
         $archery_course,
         $crypto_course
