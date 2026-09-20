@@ -3,6 +3,12 @@
 #region preset
 require('../model/model_course.php');
 require('../model/model_student.php');
+
+//uncomment kalau mau reset session
+// session_start();
+// $_SESSION = array(); //empty session
+// session_destroy();
+
 session_start(); //mulai lagi ya
 
 //create session student_list and course_list if not exist
