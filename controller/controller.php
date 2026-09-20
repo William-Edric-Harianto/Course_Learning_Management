@@ -9,7 +9,7 @@ require('../model/model_student.php');
 // $_SESSION = array(); //empty session
 // session_destroy();
 
-session_start(); //mulai lagi ya
+session_start();
 
 //create session student_list and course_list if not exist
 if (
