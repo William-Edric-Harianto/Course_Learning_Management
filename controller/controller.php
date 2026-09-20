@@ -1,7 +1,9 @@
 <?php
+
+#region preset
 require('../model/model_course.php');
 require('../model/model_student.php');
-session_start();
+session_start(); //mulai lagi ya
 
 //create session student_list and course_list if not exist
 if (
@@ -10,11 +12,63 @@ if (
 ) {
     $_SESSION['student_list'] = array();
     $_SESSION['course_list'] = array();
+    createDummyData();
 }
 
-#region Function
+#endregion
 
 #region Create
+
+function createDummyData()
+{
+    //harus bikin student dulu karena nanti array course bakal diisi
+    //bikin 5 student 3 course aja
+
+    //bikin student
+    $budi_student = new model_student('budi_cepat-01', '123-555-6767', 'buanter@ishow.speed');
+    $john_student = new model_student('John turn us', '999-555-9999', 'engineer@abble.co');
+    $gaben_student = new model_student('Gaben^New3ll', '123-555-1234', 'owner@falve.com');
+    $siska_student = new model_student('siska', '031-555-1234', 'siskaIni@npc.id');
+    $tono_student = new model_student('Ton0', '031-000-1234', 'Toh_noh@npc.id');
+    //create course
+    $ai_course = new model_course('Intro to Innovation in AI Era', 'Leverage AI!');
+    $archery_course = new model_course('Advanced Archery', 'Special class by Olympic Champion');
+    $crypto_course = new model_course('Intro to Crypto Market', 'Kepp Grinding');
+    //enroll student
+    array_push(
+        $ai_course->enrolled_list,
+        $budi_student,
+        $john_student,
+        $gaben_student
+    );
+    array_push(
+        $archery_course->enrolled_list,
+        $budi_student,
+        $siska_student,
+        $tono_student
+    );
+    array_push(
+        $crypto_course->enrolled_list,
+        $budi_student,
+        $tono_student
+    );
+    //masukin student
+    array_push(
+        $_SESSION['student_list'],
+        $budi_student,
+        $john_student,
+        $gaben_student,
+        $siska_student,
+        $tono_student
+    );
+    //masukin course
+    array_push(
+        $_SESSION['course_list'],
+        $ai_course,
+        $archery_course,
+        $crypto_course
+    );
+}
 
 function createStudent()
 {
@@ -76,14 +130,14 @@ function updateCourse($course_id)
     $course->description = $_POST['inputDescription'];
 }
 
-function updateCourseEnrollment()// ini penting lipp
+function updateCourseEnrollment() // ini penting lipp
 {
     foreach (getAllCourses() as $course_index => $course) { //setiap course
         $student_in_course = array(); // sempty array
         foreach (getAllStudents() as $student_index => $student) { //setiap student
             if (isset($_POST["course={$course_index},student={$student_index}"])) { //kalau dicentang masuk, (sesuai format inputName)
-                array_push($student_in_course,$student);
-            } 
+                array_push($student_in_course, $student);
+            }
         }
         $_SESSION['course_list'][$course_index]->enrolled_list = $student_in_course; //save array ke session
     }
